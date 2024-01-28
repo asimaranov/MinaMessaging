@@ -27,7 +27,6 @@ describe('sudoku', () => {
 
     let tx = await Mina.transaction(sender, () => {
       let zkApp = new MessagingZkApp(zkAppAddress);
-
       zkApp.store(tree.getRoot());
     });
     await tx.prove();
@@ -64,21 +63,22 @@ describe('sudoku', () => {
     await tx.prove();
     await tx.sign([senderKey]).send();
 
-    const INCORRECT_FLAGS_BY_CONDITIONS = [[
-      0b110000,
-      0b101000,
-      0b100100,
-      0b100010,
-      0b100001,
-    ],
-    [
-      0b010000,
-    ],
-    [
-      0b000110,
-      0b000101,
-      0b000111,
-    ],
+    const INCORRECT_FLAGS_BY_CONDITIONS = [
+      [
+        0b110000,
+        0b101000,
+        0b100100,
+        0b100010,
+        0b100001,
+      ],
+      [
+        0b010000,
+      ],
+      [
+        0b000110,
+        0b000101,
+        0b000111,
+      ],
     ];
 
     for (let conditionId = 0; conditionId < INCORRECT_FLAGS_BY_CONDITIONS.length; conditionId++) {
