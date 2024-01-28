@@ -15,11 +15,9 @@ import {
 } from 'o1js';
 import { Gadgets } from 'o1js/dist/node/lib/gadgets/gadgets';
 
-export { Message, MessagingZkApp };
-
 const MESSAGE_MAX_LENGTH = 254;
 
-class Message extends Struct({
+export class Message extends Struct({
   content: Field,
 }) {
   check() {
@@ -50,7 +48,7 @@ export class SentMessageEvent extends Struct({
 
 export class MerkleWitness8 extends MerkleWitness(8) {}
 
-class MessagingZkApp extends SmartContract {
+export class MessagingZkApp extends SmartContract {
   @state(PublicKey) admin = State<PublicKey>();
   @state(Field) allowlistRoot = State<Field>();
   @state(Field) sentMessagesNum = State<UInt64>();
